@@ -1,0 +1,3 @@
+fastapi==0.113.0
+Jinja2==3.1.4
+uvicorn==0.30.6
