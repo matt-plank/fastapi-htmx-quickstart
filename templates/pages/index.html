@@ -1,3 +1,7 @@
+{% from "layouts/base.html" import base_layout %}
+
 {% macro index_page() %}
-  Hello, World!
+  {% call base_layout(title="Hello, World!") %}
+    Hello, World!
+  {% endcall %}
 {% endmacro %}

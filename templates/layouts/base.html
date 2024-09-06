@@ -1,0 +1,13 @@
+{% macro base_layout(title) %}
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <title>{{ title }}</title>
+    </head>
+    <body
+      hx-boost="true"
+    >
+      {{ caller() }}
+    </body>
+  </html>
+{% endmacro %}
