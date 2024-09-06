@@ -2,6 +2,7 @@
 
 {% macro index_page() %}
   {% call base_layout(title="Hello, World!") %}
-    Hello, World!
+    Click Me!
+    <button x-data="{ count: 0 }" x-on:click="count++" x-text="count"></button>
   {% endcall %}
 {% endmacro %}
