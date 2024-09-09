@@ -1,3 +1,6 @@
+alembic==1.13.2
 fastapi==0.113.0
 Jinja2==3.1.4
+psycopg2-binary==2.9.9
+SQLAlchemy==2.0.34
 uvicorn==0.30.6
