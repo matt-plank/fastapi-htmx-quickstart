@@ -8,8 +8,13 @@ COPY package-lock.json package-lock.json
 RUN npm install
 
 COPY tailwind.config.js tailwind.config.js
+COPY webpack.config.js webpack.config.js
+
+COPY templates templates
+COPY js js
 
 RUN npx tailwindcss build -o static/dist/tailwind.css
+RUN npx webpack --mode production
 
 # Python web server
 FROM python:3.12
