@@ -1,0 +1,18 @@
+name: Test
+
+on:
+- push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Create .env file
+      run: echo "{{ secrets.ENV_FILE }}" > .env
+
+    - name: Run tests
+      run: docker compose -f docker-compose.test.yml run tests

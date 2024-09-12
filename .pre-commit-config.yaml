@@ -7,7 +7,7 @@ repos:
   - id: docker-compose-down
     name: Docker Compose Down
     language: system
-    entry: docker compose -f docker-compose.test.yml down
+    entry: docker compose -f docker-compose.test.yml down --remove-orphans
     pass_filenames: false
     always_run: true
   - id: docker-compose-build
