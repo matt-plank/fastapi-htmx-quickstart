@@ -12,30 +12,11 @@ services:
         condition: service_completed_successfully
 
   alembic:
-    build:
-      context: .
-      dockerfile: Dockerfile.alembic
-    env_file:
-      - .env
-    command: "alembic upgrade head"
-    depends_on:
-      postgres:
-        condition: service_healthy
-    attach: false
+    extends:
+      file: docker-compose.common.yml
+      service: alembic
 
   postgres:
-    image: postgres:14.5
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=postgres
-      - PGUSER=postgres
-    ports:
-      - "5432:5432"
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready", "-d", "postgres"]
-      interval: 5s
-      timeout: 5s
-      retries: 5
-      start_period: 3s
-    attach: false
+    extends:
+      file: docker-compose.common.yml
+      service: postgres
