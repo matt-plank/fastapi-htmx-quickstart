@@ -4,10 +4,22 @@ repos:
 
 - repo: local
   hooks:
-  - id: pytest
-    name: PyTest
+  - id: docker-compose-down
+    name: Docker Compose Down
     language: system
-    entry: python -m pytest .
+    entry: docker compose -f docker-compose.test.yml down
+    pass_filenames: false
+    always_run: true
+  - id: docker-compose-build
+    name: Docker Compose Build
+    language: system
+    entry: docker compose -f docker-compose.test.yml build
+    pass_filenames: false
+    always_run: true
+  - id: docker-compose-run
+    name: Docker Compose Run
+    language: system
+    entry: docker compose -f docker-compose.test.yml run --remove-orphans --rm -T tests
     pass_filenames: false
     always_run: true
 
