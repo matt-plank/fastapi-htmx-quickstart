@@ -2,6 +2,12 @@
 
 A quick-start template using Python's FastAPI and HTMX for fast and robust web applications.
 
+## Features
+
+* Modern web development utilities such as TailwindCSS, AlpineJS, and Webpack
+* Convenient local development & testing with `docker-compose`
+* Pre-configured `pre-commit` hooks to enforce code quality
+
 ## Installation
 
 Install dependencies using `pip`:
