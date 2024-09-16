@@ -4,12 +4,15 @@ services:
   tests:
     build:
       context: .
-      dockerfile: Dockerfile.test
+      dockerfile: Dockerfile
+    volumes:
+      - ./tests:/app/tests
     env_file:
       - .env
     depends_on:
       alembic:
         condition: service_completed_successfully
+    command: python -m pytest .
 
   alembic:
     extends:
