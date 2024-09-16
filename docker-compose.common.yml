@@ -4,7 +4,7 @@ services:
   alembic:
     build:
       context: .
-      dockerfile: Dockerfile.alembic
+      dockerfile: docker/Dockerfile.alembic
     env_file:
       - .env
     command: "alembic upgrade head"

@@ -4,7 +4,7 @@ services:
   browser-sync:
     build:
       context: .
-      dockerfile: Dockerfile.npm
+      dockerfile: docker/Dockerfile.npm
     volumes:
       - ./static:/app/static
       - ./templates:/app/templates
@@ -18,7 +18,9 @@ services:
     command: npx browser-sync start --proxy "web:8000" --watch --files .
 
   web:
-    build: .
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
     env_file:
       - .env
     depends_on:
@@ -33,7 +35,7 @@ services:
   tailwind:
     build:
       context: .
-      dockerfile: Dockerfile.npm
+      dockerfile: docker/Dockerfile.npm
     volumes:
       - ./static:/app/static
       - ./templates:/app/templates
@@ -45,7 +47,7 @@ services:
   webpack:
     build:
       context: .
-      dockerfile: Dockerfile.npm
+      dockerfile: docker/Dockerfile.npm
     volumes:
       - ./static:/app/static
       - ./js:/app/js
