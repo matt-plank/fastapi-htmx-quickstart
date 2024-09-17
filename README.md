@@ -10,7 +10,7 @@ A quick-start template using Python's FastAPI and HTMX for interactive yet robus
 * Convenient local development & testing with `docker-compose`
 * Pre-configured `pre-commit` hooks and GitHub Actions to enforce code quality
 
-## Installation
+## Setup
 
 Install `pip` dependencies:
 
@@ -30,6 +30,14 @@ Install pre-commit hooks:
 ```bash
 pre-commit install
 ```
+
+Set up `.env` file:
+
+```bash
+cp .env.template .env
+```
+
+Populate with your own values as needed.
 
 ## Local Development
 
