@@ -4,22 +4,10 @@ repos:
 
 - repo: local
   hooks:
-  - id: docker-compose-down
-    name: Docker Compose Down
-    language: system
-    entry: docker compose -f docker-compose.test.yml down --remove-orphans
-    pass_filenames: false
-    always_run: true
-  - id: docker-compose-build
-    name: Docker Compose Build
-    language: system
-    entry: docker compose -f docker-compose.test.yml build
-    pass_filenames: false
-    always_run: true
   - id: docker-compose-run
     name: Docker Compose Run
     language: system
-    entry: docker compose -f docker-compose.test.yml run --remove-orphans --rm -T tests
+    entry: docker compose -f docker-compose.test.yaml run --build --remove-orphans --rm -T tests
     pass_filenames: false
     always_run: true
 

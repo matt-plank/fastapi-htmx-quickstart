@@ -10,16 +10,12 @@ services:
     env_file:
       - .env
     depends_on:
-      alembic:
-        condition: service_completed_successfully
+      postgres-test-db:
+        condition: service_healthy
     command: python -m pytest .
 
-  alembic:
+  postgres-test-db:
+    hostname: postgres
     extends:
-      file: docker-compose.common.yml
-      service: alembic
-
-  postgres:
-    extends:
-      file: docker-compose.common.yml
+      file: docker-compose.common.yaml
       service: postgres

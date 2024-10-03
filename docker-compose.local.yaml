@@ -57,10 +57,10 @@ services:
 
   alembic:
     extends:
-      file: docker-compose.common.yml
+      file: docker-compose.common.yaml
       service: alembic
 
   postgres:
     extends:
-      file: docker-compose.common.yml
+      file: docker-compose.common.yaml
       service: postgres
