@@ -1,4 +1,5 @@
 import os
+from datetime import timedelta
 
 
 def database_url() -> str:
@@ -9,3 +10,6 @@ def database_url() -> str:
         return environment_variable.replace("postgres://", "postgresql://", 1)
 
     return environment_variable
+
+
+MAX_AUTH_SESSION_AGE: timedelta = timedelta(days=1)

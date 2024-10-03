@@ -1,8 +1,8 @@
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
+from app.database.models.auth import PasswordHash
 from app.database.models.base import Base
-from app.database.models.password import PasswordHash
 
 
 class Login(Base):
