@@ -15,4 +15,4 @@ jobs:
       run: echo "${{ secrets.ENV_FILE }}" > .env
 
     - name: Run tests
-      run: docker compose -f docker-compose.test.yml run tests
+      run: docker compose -f docker-compose.test.yaml run tests
