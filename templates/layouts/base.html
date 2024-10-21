@@ -4,6 +4,9 @@
     <head>
       <title>{{ title }}</title>
 
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
       <!-- External Libraries -->
       <script
         src="https://unpkg.com/htmx.org@1.9.9"
@@ -18,9 +21,7 @@
       <!-- Webpack build artefacts -->
       <script src="/static/dist/bundle.js"></script>
     </head>
-    <body
-      hx-boost="true"
-    >
+    <body hx-boost="true">
       {{ caller() }}
     </body>
   </html>
