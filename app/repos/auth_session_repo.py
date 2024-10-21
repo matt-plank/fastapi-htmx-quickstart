@@ -7,7 +7,7 @@ from app import database
 from app.database.models.auth import AuthSession
 
 
-class AuthSessionRepo:
+class _AuthSessionRepo:
     """Manages access to AuthSession db objects."""
 
     def __init__(self, session: Session) -> None:
@@ -27,9 +27,9 @@ class AuthSessionRepo:
         return found_token
 
 
-async def dependency(session: database.Session) -> AuthSessionRepo:
+async def dependency(session: database.Session) -> _AuthSessionRepo:
     """FastAPI dependency to provide a db session to the repo."""
-    return AuthSessionRepo(session=session)
+    return _AuthSessionRepo(session=session)
 
 
-Repo = Annotated[AuthSessionRepo, Depends(dependency)]
+AuthSessionRepo = Annotated[_AuthSessionRepo, Depends(dependency)]
