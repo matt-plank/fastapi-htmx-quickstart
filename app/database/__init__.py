@@ -17,7 +17,7 @@ def init(database_url: str) -> None:
     print("[database] Initialising database engine...")
     engine = create_engine(database_url)
     SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-    print(["[database] Done."])
+    print("[database] Done.")
 
 
 async def dependency() -> AsyncGenerator[SQLASession, None]:
