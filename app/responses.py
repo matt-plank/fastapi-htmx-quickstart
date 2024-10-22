@@ -1,7 +1,7 @@
 from fastapi import Response
 from jinja2 import Environment, FileSystemLoader
 
-loader = FileSystemLoader("templates")
+loader = FileSystemLoader("frontend/templates")
 environment = Environment(loader=loader, cache_size=0)
 environment.globals.update({})
 

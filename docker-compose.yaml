@@ -6,8 +6,7 @@ services:
       context: .
       dockerfile: docker/Dockerfile.npm
     volumes:
-      - ./static:/app/static
-      - ./templates:/app/templates
+      - ./frontend:/app/frontend
     ports:
       - "3000:3000"
       - "3001:3001"
@@ -28,8 +27,7 @@ services:
         condition: service_completed_successfully
     volumes:
       - ./app:/app/app
-      - ./templates:/app/templates
-      - ./static:/app/static
+      - ./frontend:/app/frontend
     command: uvicorn app.app:app --host 0.0.0.0 --port $PORT --reload
 
   tailwind:
@@ -37,8 +35,7 @@ services:
       context: .
       dockerfile: docker/Dockerfile.npm
     volumes:
-      - ./static:/app/static
-      - ./templates:/app/templates
+      - ./frontend:/app/frontend
       - ./tailwind.config.js:/app/tailwind.config.js
     stdin_open: true
     attach: false
@@ -49,8 +46,7 @@ services:
       context: .
       dockerfile: docker/Dockerfile.npm
     volumes:
-      - ./static:/app/static
-      - ./js:/app/js
+      - ./frontend:/app/frontend
       - ./webpack.config.js:/app/webpack.config.js
     attach: false
     command: npx webpack --mode development --watch
