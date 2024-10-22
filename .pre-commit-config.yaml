@@ -4,22 +4,10 @@ repos:
 
 - repo: local
   hooks:
-  - id: docker-compose-setup
-    name: Docker Compose Setup
+  - id: docker-compose-test
+    name: Docker Compose Test
     language: system
-    entry: docker compose -f docker-compose.test.yaml down
-    pass_filenames: false
-    always_run: true
-  - id: docker-compose-run
-    name: Docker Compose Run
-    language: system
-    entry: docker compose -f docker-compose.test.yaml run --remove-orphans --build --rm -T tests
-    pass_filenames: false
-    always_run: true
-  - id: docker-compse-cleanup
-    name: Docke Compose Cleanup
-    language: system
-    entry: docker compose -f docker-compose.test.yaml down
+    entry: scripts/docker-compose-test.sh run --rm --remove-orphans --build tests
     pass_filenames: false
     always_run: true
 
