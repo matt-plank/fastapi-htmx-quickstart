@@ -3,7 +3,7 @@ from typing import Callable, Literal
 from fastapi.testclient import TestClient
 from httpx import Response
 
-HttpVerb = Literal["GET", "PUT", "POST", "DELETE"]
+HttpVerb = Literal["GET", "PUT", "PATCH", "POST", "DELETE"]
 
 
 class RequestSequence:
@@ -15,6 +15,7 @@ class RequestSequence:
         self.action_lookup: dict[HttpVerb, Callable] = {
             "GET": self.client.get,
             "PUT": self.client.put,
+            "PATCH": self.client.patch,
             "POST": self.client.post,
             "DELETE": self.client.delete,
         }
@@ -24,8 +25,9 @@ class RequestSequence:
         method: HttpVerb,
         target: str,
         assert_status_code: int = 200,
-        assert_contains: str | None = None,
+        assert_contains: str | list[str] | None = None,
         assert_cookie: str | None = None,
+        debug: bool = False,
         **data,
     ):
         response: Response | None = None
@@ -37,8 +39,17 @@ class RequestSequence:
 
         assert response is not None
 
+        if debug:
+            print(response.text)
+
         assert response.status_code == assert_status_code
-        assert assert_contains is None or assert_contains in response.text
+
+        if isinstance(assert_contains, list):
+            for item in assert_contains:
+                assert item in response.text, f"{item} not found in response text"
+        elif isinstance(assert_contains, str):
+            assert assert_contains in response.text, f"{assert_contains} not found in response text"
+
         assert assert_cookie is None or assert_cookie in response.cookies
 
         for cookie in response.cookies:
