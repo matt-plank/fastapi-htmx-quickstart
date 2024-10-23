@@ -48,6 +48,7 @@ services:
     volumes:
       - ./frontend:/app/frontend
       - ./webpack.config.js:/app/webpack.config.js
+      - ./tsconfig.json:/app/tsconfig.json
     attach: false
     command: npx webpack --mode development --watch
 

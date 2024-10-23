@@ -9,6 +9,7 @@ RUN npm install
 
 COPY tailwind.config.js tailwind.config.js
 COPY webpack.config.js webpack.config.js
+COPY tsconfig.json tsconfig.json
 
 COPY frontend frontend
 
