@@ -39,7 +39,7 @@ services:
       - ./tailwind.config.js:/app/tailwind.config.js
     stdin_open: true
     attach: false
-    command: npx tailwindcss -o static/dist/tailwind.css --watch
+    command: npx tailwindcss -o frontend/static/dist/tailwind.css --watch
 
   webpack:
     build:

@@ -13,7 +13,7 @@ COPY tsconfig.json tsconfig.json
 
 COPY frontend frontend
 
-RUN npx tailwindcss build -o static/dist/tailwind.css
+RUN npx tailwindcss build -o frontend/static/dist/tailwind.css
 RUN npx webpack --mode production
 
 # Python web server
