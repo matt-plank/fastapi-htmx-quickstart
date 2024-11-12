@@ -53,6 +53,8 @@ services:
     command: npx webpack --mode development --watch
 
   alembic:
+    volumes:
+      - ./app/database:/app/app/database
     extends:
       file: docker-compose.common.yaml
       service: alembic

@@ -7,7 +7,8 @@ services:
       dockerfile: docker/Dockerfile.alembic
     env_file:
       - .env
-    command: "alembic upgrade head"
+    entrypoint: alembic
+    command: upgrade head
     depends_on:
       postgres:
         condition: service_healthy
