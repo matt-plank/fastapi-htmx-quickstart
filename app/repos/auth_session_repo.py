@@ -1,9 +1,10 @@
+from datetime import datetime
 from typing import Annotated
 
 from fastapi import Depends
 from sqlalchemy.orm import Session
 
-from app import database
+from app import config, database
 from app.database.models.auth import AuthSession
 
 
@@ -14,14 +15,14 @@ class _AuthSessionRepo:
         """Initialise the repo with a db session."""
         self.session = session
 
-    def find_by_token(self, token: str, must_be_valid: bool = True) -> AuthSession | None:
+    def find_by_token(self, token: str, current_time: datetime) -> AuthSession | None:
         """Find an auth session by its token."""
         found_token = self.session.query(AuthSession).filter_by(token=token).one_or_none()
 
         if found_token is None:
             return None
 
-        if must_be_valid and not found_token.valid():
+        if not found_token.valid(current_time, config.MAX_AUTH_SESSION_AGE):
             return None
 
         return found_token

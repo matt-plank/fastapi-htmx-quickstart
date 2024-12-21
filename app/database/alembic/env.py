@@ -1,9 +1,9 @@
+import os
 from logging.config import fileConfig
 
 from alembic import context
 from sqlalchemy import engine_from_config, pool
 
-from app import config as app_config
 from app.database.models.base import Base
 
 config = context.config
@@ -12,7 +12,19 @@ if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
 target_metadata = Base.metadata
-config.set_main_option("sqlalchemy.url", app_config.database_url())
+
+
+def database_url() -> str:
+    """Formatted database url string."""
+    environment_variable = os.environ["DATABASE_URL"]
+
+    if environment_variable.startswith("postgres://"):
+        return environment_variable.replace("postgres://", "postgresql://", 1)
+
+    return environment_variable
+
+
+config.set_main_option("sqlalchemy.url", database_url())
 
 
 def run_migrations_offline() -> None:

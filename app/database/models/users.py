@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import TYPE_CHECKING
 
 from sqlalchemy import ForeignKey
@@ -18,6 +19,7 @@ class Login(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     email: Mapped[str]
     password_hash_id: Mapped[int] = mapped_column(ForeignKey("password_hashes.id"))
+    created: Mapped[datetime]
 
     # Relationships
     password_hash: Mapped["PasswordHash"] = relationship()

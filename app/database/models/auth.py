@@ -1,10 +1,10 @@
-from datetime import datetime
+import uuid
+from datetime import datetime, timedelta
 
 import bcrypt
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app import config
-from app.database import defaults
 from app.database.models.base import Base
 
 
@@ -33,9 +33,9 @@ class AuthSession(Base):
 
     # DB Columns
     id: Mapped[int] = mapped_column(primary_key=True)
-    token: Mapped[str] = mapped_column(default=defaults.token)
-    last_action: Mapped[datetime] = mapped_column(default=defaults.now)
+    token: Mapped[str] = mapped_column(default=lambda: str(uuid.uuid4()))
+    last_action: Mapped[datetime]
 
-    def valid(self) -> bool:
+    def valid(self, current_time: datetime, max_auth_session_age: timedelta) -> bool:
         """Check if the session is still valid."""
-        return defaults.now() - self.last_action < config.MAX_AUTH_SESSION_AGE
+        return current_time - self.last_action < max_auth_session_age
