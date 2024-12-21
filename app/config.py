@@ -13,3 +13,4 @@ def database_url() -> str:
 
 
 MAX_AUTH_SESSION_AGE: timedelta = timedelta(days=1)
+MUST_USE_HTTPS: bool = os.environ["MUST_USE_HTTPS"] == "true"
