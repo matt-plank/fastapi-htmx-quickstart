@@ -10,15 +10,16 @@ if TYPE_CHECKING:
     from app.database.models.auth import PasswordHash
 
 
-class Login(Base):
+class User(Base):
     """Basic user model."""
 
     __tablename__ = "users"
 
     # DB Columns
     id: Mapped[int] = mapped_column(primary_key=True)
-    email: Mapped[str]
     password_hash_id: Mapped[int] = mapped_column(ForeignKey("password_hashes.id"))
+
+    email: Mapped[str]
     created: Mapped[datetime]
 
     # Relationships
