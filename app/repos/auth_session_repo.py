@@ -34,3 +34,6 @@ async def dependency(session: database.Session) -> _AuthSessionRepo:
 
 
 AuthSessionRepo = Annotated[_AuthSessionRepo, Depends(dependency)]
+
+# Helps VS Code autocomplete types
+__all__ = ("AuthSessionRepo",)
