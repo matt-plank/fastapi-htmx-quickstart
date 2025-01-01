@@ -1,11 +1,15 @@
 import uuid
-from datetime import datetime, timedelta
+from datetime import datetime
+from typing import TYPE_CHECKING
 
 import bcrypt
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy import ForeignKey
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from app import config
 from app.database.models.base import Base
+
+if TYPE_CHECKING:
+    from app.database.models.users import User
 
 
 class PasswordHash(Base):
@@ -29,13 +33,15 @@ class PasswordHash(Base):
 class AuthSession(Base):
     """Temporary auth sessions for website login."""
 
-    __tablename__ = "auth_session"
+    __tablename__ = "auth_sessions"
 
     # DB Columns
     id: Mapped[int] = mapped_column(primary_key=True)
+    user_id: Mapped[int | None] = mapped_column(ForeignKey("users.id"))
+
     token: Mapped[str] = mapped_column(default=lambda: str(uuid.uuid4()))
+    deactivated: Mapped[bool] = mapped_column(default=False)
     last_action: Mapped[datetime]
 
-    def valid(self, current_time: datetime, max_auth_session_age: timedelta) -> bool:
-        """Check if the session is still valid."""
-        return current_time - self.last_action < max_auth_session_age
+    # Relationships
+    user: Mapped["User | None"] = relationship(back_populates="auth_sessions")
