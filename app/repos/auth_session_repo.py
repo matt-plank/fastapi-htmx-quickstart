@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import UTC, datetime
 from typing import Annotated
 
 from fastapi import Depends
@@ -33,7 +33,7 @@ class _AuthSessionRepo:
         if found_auth_session.deactivated:
             return None
 
-        if current_time - found_auth_session.last_action < config.MAX_AUTH_SESSION_AGE:
+        if current_time - found_auth_session.last_action.replace(tzinfo=UTC) < config.MAX_AUTH_SESSION_AGE:
             return None
 
         return found_auth_session
