@@ -7,7 +7,7 @@ repos:
   - id: docker-compose-test
     name: Docker Compose Test
     language: system
-    entry: scripts/docker-compose-test.sh run --rm --remove-orphans --build tests
+    entry: scripts/docker-compose-test.sh run -T --build tests
     pass_filenames: false
     always_run: true
 
