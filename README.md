@@ -41,14 +41,8 @@ Populate with your own values as needed.
 
 ## Local Development
 
-Run cluster with `docker-compose`:
-
-```bash
-docker compose up --build
-```
-
 Run interactive cluster, for real-time development:
 
 ```bash
-docker compose -f docker-compose.local.yml up --build
+docker compose up --build
 ```
