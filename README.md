@@ -31,10 +31,14 @@ Install pre-commit hooks:
 pre-commit install
 ```
 
-Set up `.env` file:
+Retrieve the `.env` file, or create a new one:
 
 ```bash
-cp .env.template .env
+PORT="8000"
+
+DATABASE_URL="postgres://postgres:postgres@postgres:5432/postgres"
+
+MUST_USE_HTTPS="false"
 ```
 
 Populate with your own values as needed.
